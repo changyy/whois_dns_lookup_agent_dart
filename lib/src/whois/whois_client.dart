@@ -29,9 +29,8 @@ class WhoisClient {
     bool stripSubdomain = true,
   }) async {
     final stopwatch = Stopwatch()..start();
-    final normalized = stripSubdomain
-        ? _normalizeDomain(domain)
-        : _basicCleanup(domain);
+    final normalized =
+        stripSubdomain ? _normalizeDomain(domain) : _basicCleanup(domain);
     final tld = _extractTld(normalized);
 
     String? authServer;
@@ -104,13 +103,34 @@ class WhoisClient {
   /// Common 2-segment public suffixes we recognise without pulling in a full
   /// PSL. Covers the ccTLDs most apps actually hit.
   static const _twoSegmentSuffixes = {
-    'co.uk', 'org.uk', 'ac.uk', 'gov.uk',
-    'com.tw', 'org.tw', 'net.tw', 'edu.tw', 'gov.tw',
-    'com.au', 'org.au', 'net.au', 'edu.au', 'gov.au',
-    'co.jp', 'or.jp', 'ne.jp', 'ac.jp', 'go.jp',
-    'co.nz', 'org.nz', 'net.nz',
-    'com.br', 'com.cn', 'org.cn', 'net.cn',
-    'co.kr', 'or.kr',
+    'co.uk',
+    'org.uk',
+    'ac.uk',
+    'gov.uk',
+    'com.tw',
+    'org.tw',
+    'net.tw',
+    'edu.tw',
+    'gov.tw',
+    'com.au',
+    'org.au',
+    'net.au',
+    'edu.au',
+    'gov.au',
+    'co.jp',
+    'or.jp',
+    'ne.jp',
+    'ac.jp',
+    'go.jp',
+    'co.nz',
+    'org.nz',
+    'net.nz',
+    'com.br',
+    'com.cn',
+    'org.cn',
+    'net.cn',
+    'co.kr',
+    'or.kr',
   };
 
   /// Strip protocol/path/port but leave the hostname intact (subdomains kept).
@@ -182,23 +202,34 @@ class WhoisClient {
       }
 
       createdAt ??= _matchDate(key, value, const {
-        'creation date', 'created', 'created on', 'registered',
-        'registered on', 'registration time', 'domain registration date',
+        'creation date',
+        'created',
+        'created on',
+        'registered',
+        'registered on',
+        'registration time',
+        'domain registration date',
       });
       expiresAt ??= _matchDate(key, value, const {
-        'registry expiry date', 'registrar registration expiration date',
-        'expiry date', 'expiration date', 'expires', 'expire',
-        'paid-till', 'expiration time',
+        'registry expiry date',
+        'registrar registration expiration date',
+        'expiry date',
+        'expiration date',
+        'expires',
+        'expire',
+        'paid-till',
+        'expiration time',
       });
       updatedAt ??= _matchDate(key, value, const {
-        'updated date', 'last updated', 'last modified',
+        'updated date',
+        'last updated',
+        'last modified',
         'last update of whois database',
       });
 
       if (key == 'domain status' || key == 'status') {
-        final cleaned = value
-            .replaceAll(RegExp(r'\s*\(?https?://\S+\)?'), '')
-            .trim();
+        final cleaned =
+            value.replaceAll(RegExp(r'\s*\(?https?://\S+\)?'), '').trim();
         if (cleaned.isNotEmpty && !statuses.contains(cleaned)) {
           statuses.add(cleaned);
         }
@@ -241,8 +272,18 @@ class WhoisClient {
     if (m != null) {
       final day = int.tryParse(m.group(1)!);
       const monNames = {
-        'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
-        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+        'jan': 1,
+        'feb': 2,
+        'mar': 3,
+        'apr': 4,
+        'may': 5,
+        'jun': 6,
+        'jul': 7,
+        'aug': 8,
+        'sep': 9,
+        'oct': 10,
+        'nov': 11,
+        'dec': 12,
       };
       final mon = monNames[m.group(2)!.toLowerCase()];
       final year = int.tryParse(m.group(3)!);

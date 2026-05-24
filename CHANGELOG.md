@@ -1,8 +1,8 @@
 # Changelog
 
-Version format: `1.YYYYmmdd.HHMMSS` (zero-padded UTC build clock).
+Version format: `1.YYYYmmdd.HHMMSS` (zero-padded, Asia/Taipei build clock, no DST).
 
-## 1.20260524.110000
+## 1.20260524.114512
 
 - CLI: output now includes a top-level `agent` block with `package`, `version`,
   and `query_at` (UTC ISO 8601). Lets downstream consumers (monitoring

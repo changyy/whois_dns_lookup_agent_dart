@@ -1,18 +1,44 @@
-# Dart / Flutter
+# Files and directories created by pub
 .dart_tool/
 .packages
 build/
+# Remove the following pattern if you wish to check in your lock file
 pubspec.lock
-.flutter-plugins
-.flutter-plugins-dependencies
 
-# IDE
+# Conventional directory for build outputs
+build/
+
+# Directory created by dartdoc
+doc/api/
+
+# Coverage files
+coverage/
+
+# IDEs
+.vscode/
 .idea/
 *.iml
-.vscode/
+*.ipr
+*.iws
+.project
+.metadata
+.classpath
+.settings/
 
-# macOS
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Coverage
-coverage/
+# Test coverage
+lcov.info
+test/.test_coverage.dart

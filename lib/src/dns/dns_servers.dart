@@ -13,10 +13,8 @@ class DnsServers {
       note: 'OS resolver',
       isLocal: true,
     ),
-
     DnsServer(name: 'Google', ip: '8.8.8.8', operator: 'Google'),
     DnsServer(name: 'Google (2)', ip: '8.8.4.4', operator: 'Google'),
-
     DnsServer(name: 'Cloudflare', ip: '1.1.1.1', operator: 'Cloudflare'),
     DnsServer(name: 'Cloudflare (2)', ip: '1.0.0.1', operator: 'Cloudflare'),
     DnsServer(
@@ -43,11 +41,9 @@ class DnsServers {
       operator: 'Cloudflare',
       note: 'blocks malware + adult',
     ),
-
     DnsServer(name: 'Quad9', ip: '9.9.9.9', operator: 'Quad9'),
     DnsServer(name: 'OpenDNS', ip: '208.67.222.222', operator: 'Cisco OpenDNS'),
     DnsServer(name: 'AdGuard', ip: '94.140.14.14', operator: 'AdGuard'),
-
     DnsServer(
       name: 'Alibaba',
       ip: '223.5.5.5',
@@ -60,7 +56,6 @@ class DnsServers {
       operator: 'Alibaba',
       note: 'CN region',
     ),
-
     DnsServer(
       name: 'CleanBrowsing',
       ip: '185.228.168.9',

@@ -18,28 +18,21 @@ import 'package:whois_dns_lookup_agent/whois_dns_lookup_agent.dart';
 
 Future<void> main(List<String> argv) async {
   final parser = ArgParser()
-    ..addFlag('dns',
-        defaultsTo: true,
-        help: 'Run the multi-server DNS lookup.')
-    ..addFlag('whois',
-        defaultsTo: true,
-        help: 'Run the Whois lookup.')
+    ..addFlag('dns', defaultsTo: true, help: 'Run the multi-server DNS lookup.')
+    ..addFlag('whois', defaultsTo: true, help: 'Run the Whois lookup.')
     ..addFlag('strip-subdomain',
         defaultsTo: true,
         help: 'Reduce hostname to its registrable domain (eTLD+1) before '
             'Whois query (www.foo.com → foo.com).')
     ..addOption('timeout',
-        defaultsTo: '5',
-        help: 'Per-query timeout in seconds.')
+        defaultsTo: '5', help: 'Per-query timeout in seconds.')
     ..addOption('indent',
         help: 'Indent JSON output by N spaces (default: compact one-line).')
     ..addFlag('include-raw',
         defaultsTo: false,
         help: 'Include the raw whois response in the JSON output.')
-    ..addFlag('help',
-        abbr: 'h', negatable: false, help: 'Show this help.')
-    ..addFlag('version',
-        negatable: false, help: 'Print version and exit.');
+    ..addFlag('help', abbr: 'h', negatable: false, help: 'Show this help.')
+    ..addFlag('version', negatable: false, help: 'Print version and exit.');
 
   ArgResults args;
   try {
@@ -51,7 +44,8 @@ Future<void> main(List<String> argv) async {
   }
 
   if (args['help'] as bool) {
-    stdout.writeln('Usage: whois_dns_lookup_agent <hostname-or-domain> [options]');
+    stdout.writeln(
+        'Usage: whois_dns_lookup_agent <hostname-or-domain> [options]');
     stdout.writeln(parser.usage);
     exit(0);
   }
@@ -63,9 +57,7 @@ Future<void> main(List<String> argv) async {
   // Input: positional arg, or stdin if piped.
   String? input = args.rest.isNotEmpty ? args.rest.first : null;
   if (input == null && !stdin.hasTerminal) {
-    final s = await stdin
-        .transform(const SystemEncoding().decoder)
-        .join();
+    final s = await stdin.transform(const SystemEncoding().decoder).join();
     final trimmed = s.trim();
     if (trimmed.isNotEmpty) input = trimmed.split(RegExp(r'\s+')).first;
   }
@@ -155,7 +147,8 @@ Future<void> main(List<String> argv) async {
   exit(ok ? 0 : 1);
 }
 
-Future<Map<String, dynamic>> _runDns(String hostname, {required Duration timeout}) async {
+Future<Map<String, dynamic>> _runDns(String hostname,
+    {required Duration timeout}) async {
   final resolver = DnsResolver();
   final results = await resolver.queryAll(hostname, timeout: timeout);
 

@@ -1,5 +1,11 @@
 # whois_dns_lookup_agent
 
+[![pub package](https://img.shields.io/pub/v/whois_dns_lookup_agent.svg)](https://pub.dev/packages/whois_dns_lookup_agent)
+[![pub points](https://img.shields.io/pub/points/whois_dns_lookup_agent)](https://pub.dev/packages/whois_dns_lookup_agent/score)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.0-blue.svg)](https://dart.dev/get-dart)
+[![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Linux%20%7C%20macOS%20%7C%20Windows-lightgrey)](https://pub.dev/packages/whois_dns_lookup_agent)
+
 Pure-Dart multi-server DNS lookup + Whois client.  Zero runtime
 dependencies (only `args` for the CLI). Ships a `whois_dns_lookup_agent`
 CLI that emits JSON, suitable for shell pipelines.
@@ -150,6 +156,211 @@ $ dart bin/whois_dns_lookup_agent.dart google.com --include-raw \
 dart bin/whois_dns_lookup_agent.dart slow-tld.example --timeout 2
 ```
 
+#### Full output reference (`www.google.com | jq .`)
+
+The canonical end-to-end demo. Click to expand the full JSON — 16 DNS
+servers (Local + 15 public), grouped by IP set, plus the Verisign whois
+record.
+
+<details>
+<summary><code>dart bin/whois_dns_lookup_agent.dart www.google.com | jq .</code></summary>
+
+```json
+{
+  "status": true,
+  "error": [],
+  "agent": {
+    "package": "whois_dns_lookup_agent",
+    "version": "1.20260524.110000",
+    "query_at": "2026-05-24T03:25:23.202817Z"
+  },
+  "input": "www.google.com",
+  "dns_lookup": {
+    "queried": "www.google.com",
+    "server_count": 16,
+    "results": [
+      {
+        "server": {
+          "name": "Local",
+          "ip": "system",
+          "operator": "this device",
+          "note": "OS resolver",
+          "is_local": true
+        },
+        "ips": [
+          "142.251.151.119",
+          "142.251.150.119",
+          "142.251.152.119",
+          "142.251.157.119",
+          "142.251.155.119",
+          "142.251.156.119",
+          "142.251.154.119",
+          "142.251.153.119"
+        ],
+        "latency_ms": 27,
+        "error": null
+      },
+      {
+        "server": { "name": "Google", "ip": "8.8.8.8", "operator": "Google" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 21,
+        "error": null
+      },
+      {
+        "server": { "name": "Google (2)", "ip": "8.8.4.4", "operator": "Google" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 22,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare", "ip": "1.1.1.1", "operator": "Cloudflare" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 22,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare (2)", "ip": "1.0.0.1", "operator": "Cloudflare" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 22,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare Malware", "ip": "1.1.1.2", "operator": "Cloudflare", "note": "blocks malware" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 23,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare Malware (2)", "ip": "1.0.0.2", "operator": "Cloudflare", "note": "blocks malware" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 23,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare Family", "ip": "1.1.1.3", "operator": "Cloudflare", "note": "blocks malware + adult" },
+        "ips": ["216.239.38.120"],
+        "latency_ms": 26,
+        "error": null
+      },
+      {
+        "server": { "name": "Cloudflare Family (2)", "ip": "1.0.0.3", "operator": "Cloudflare", "note": "blocks malware + adult" },
+        "ips": ["216.239.38.120"],
+        "latency_ms": 26,
+        "error": null
+      },
+      {
+        "server": { "name": "Quad9", "ip": "9.9.9.9", "operator": "Quad9" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 140,
+        "error": null
+      },
+      {
+        "server": { "name": "OpenDNS", "ip": "208.67.222.222", "operator": "Cisco OpenDNS" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 122,
+        "error": null
+      },
+      {
+        "server": { "name": "AdGuard", "ip": "94.140.14.14", "operator": "AdGuard" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 100,
+        "error": null
+      },
+      {
+        "server": { "name": "Alibaba", "ip": "223.5.5.5", "operator": "Alibaba", "note": "CN region" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 66,
+        "error": null
+      },
+      {
+        "server": { "name": "Alibaba (2)", "ip": "223.6.6.6", "operator": "Alibaba", "note": "CN region" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 100,
+        "error": null
+      },
+      {
+        "server": { "name": "CleanBrowsing", "ip": "185.228.168.9", "operator": "CleanBrowsing" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 134,
+        "error": null
+      },
+      {
+        "server": { "name": "DNS.SB", "ip": "185.222.222.222", "operator": "DNS.SB" },
+        "ips": ["142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119", "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"],
+        "latency_ms": 105,
+        "error": null
+      }
+    ],
+    "groups": [
+      {
+        "ips": [
+          "142.251.150.119", "142.251.151.119", "142.251.152.119", "142.251.153.119",
+          "142.251.154.119", "142.251.155.119", "142.251.156.119", "142.251.157.119"
+        ],
+        "server_count": 14,
+        "server_names": [
+          "Local", "Google", "Google (2)",
+          "Cloudflare", "Cloudflare (2)",
+          "Cloudflare Malware", "Cloudflare Malware (2)",
+          "Quad9", "OpenDNS", "AdGuard",
+          "Alibaba", "Alibaba (2)",
+          "CleanBrowsing", "DNS.SB"
+        ]
+      },
+      {
+        "ips": ["216.239.38.120"],
+        "server_count": 2,
+        "server_names": ["Cloudflare Family", "Cloudflare Family (2)"]
+      }
+    ]
+  },
+  "whois": {
+    "domain": "google.com",
+    "authoritative_server": "whois.verisign-grs.com",
+    "registrar": "MarkMonitor Inc.",
+    "created_at": "1997-09-15T04:00:00.000Z",
+    "expires_at": "2028-09-14T04:00:00.000Z",
+    "updated_at": "2019-09-09T15:39:04.000Z",
+    "days_until_expiry": 844,
+    "statuses": [
+      "clientDeleteProhibited",
+      "clientTransferProhibited",
+      "clientUpdateProhibited",
+      "serverDeleteProhibited",
+      "serverTransferProhibited",
+      "serverUpdateProhibited"
+    ],
+    "name_servers": [
+      "ns1.google.com", "ns2.google.com",
+      "ns3.google.com", "ns4.google.com"
+    ],
+    "latency_ms": 642
+  }
+}
+```
+
+</details>
+
+**What to notice in this output:**
+
+- **`agent` block** — package + version + UTC timestamp, so downstream
+  consumers (monitors, caches) can record which version produced the
+  payload.
+- **`dns_lookup.groups`** — 14 servers (including your `Local` OS
+  resolver) agree on the standard 8-IP geo-routed answer.  Two
+  Cloudflare Family resolvers diverge — they return `216.239.38.120`,
+  which is Google's "this content is blocked" landing page. That single
+  data point tells you Google deems this content acceptable for family
+  filters (vs. e.g. a porn site, where you'd see Family resolvers point
+  somewhere else).
+- **`dns_lookup.results[].ips` ordering** — within each row IPs come
+  back in the order the server delivered them (DNS uses this for round
+  robin). The `groups` view sorts canonically so cross-server
+  comparison is deterministic.
+- **`whois`** — `google.com` was normalised from `www.google.com`
+  (eTLD+1), Verisign is the authoritative server, MarkMonitor is the
+  registrar, expires 2028-09-14, all six ICANN status locks engaged.
+
 ### JSON shape
 
 ```jsonc
@@ -254,6 +465,27 @@ For `.com` / `.net` the Verisign registry already returns these inline;
 for some ccTLDs (`.co.uk`, `.jp`, etc.) you may need to follow up at the
 registrar level. The raw response is always available in `rawText` /
 `--include-raw` for further parsing.
+
+## Development
+
+```bash
+dart pub get
+dart analyze
+dart test
+dart run example/basic_usage.dart google.com
+
+# Version is stored in two places — pubspec.yaml and lib/src/version.dart —
+# keep them in sync with the helper script:
+dart run tool/update_version.dart --check                  # verify both agree
+dart run tool/update_version.dart                          # auto-bump to Taipei time
+dart run tool/update_version.dart 1.20260601.090000        # set explicit
+
+# Run the CLI without installing
+dart bin/whois_dns_lookup_agent.dart www.google.com | jq .
+```
+
+After bumping the version, **also add a section to CHANGELOG.md** before
+committing.
 
 ## Limitations
 

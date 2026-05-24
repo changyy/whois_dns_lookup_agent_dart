@@ -1,6 +1,6 @@
 name: whois_dns_lookup_agent
 description: Pure-Dart multi-server DNS lookup + Whois client. CLI emits JSON suitable for shell pipelines.
-version: 1.20260524.110000
+version: 1.20260524.114512
 repository: https://github.com/changyy/whois_dns_lookup_agent_dart
 homepage: https://github.com/changyy/whois_dns_lookup_agent_dart
 issue_tracker: https://github.com/changyy/whois_dns_lookup_agent_dart/issues
