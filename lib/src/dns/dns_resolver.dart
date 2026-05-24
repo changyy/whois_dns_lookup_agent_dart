@@ -16,6 +16,12 @@ import 'dns_servers.dart';
 ///   This is useful for detecting captive portals, ISP rewrites, and other
 ///   DNS-level interference by comparing the local answer to public DNS.
 class DnsResolver {
+  /// Creates a stateless DNS resolver.
+  ///
+  /// No I/O happens until you call [queryA] or [queryAll]. The same instance
+  /// is safe to reuse for any number of concurrent queries.
+  DnsResolver();
+
   /// Query [hostname] against [server] for IPv4 A records.
   Future<DnsResult> queryA(
     String hostname,

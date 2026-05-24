@@ -2,6 +2,17 @@
 
 Version format: `1.YYYYmmdd.HHMMSS` (zero-padded, Asia/Taipei build clock, no DST).
 
+## 1.20260524.125658
+
+- Docs: added dartdoc comments to every public constructor, field, getter, and
+  method across `DnsResolver`, `DnsResult`, `DnsServer`, `DnsServers`,
+  `WhoisClient`, `WhoisResponse`, and `WhoisDnsLookupAgentVersion`. Lifts
+  documented API coverage from 29.2% to ~100% for pana scoring.
+- Example: added `example/example.dart` (pub.dev-recognised filename) and an
+  `example/README.md` with run instructions and a programmatic-use snippet.
+  Existing `example/basic_usage.dart` is left in place. Fixes the
+  "Package has an example" pana check (was 0/10).
+
 ## 1.20260524.114512
 
 - CLI: output now includes a top-level `agent` block with `package`, `version`,

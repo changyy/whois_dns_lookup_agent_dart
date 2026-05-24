@@ -5,6 +5,11 @@ import 'dns_server.dart';
 /// Ordering = display order. Local goes first so callers can spot when their
 /// network's resolver diverges from public DNS.
 class DnsServers {
+  /// Default list of resolvers used by [DnsResolver.queryAll] when no explicit
+  /// `servers` argument is provided. Includes the OS resolver plus a curated
+  /// set of public recursive resolvers (Google, Cloudflare and its
+  /// malware/family variants, Quad9, OpenDNS, AdGuard, Alibaba,
+  /// CleanBrowsing, DNS.SB).
   static const List<DnsServer> defaults = [
     DnsServer(
       name: 'Local',

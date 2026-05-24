@@ -15,6 +15,13 @@ import 'whois_response.dart';
 ///   4. Read raw response.
 ///   5. Parse common fields (registrar, dates, status, name servers).
 class WhoisClient {
+  /// Creates a stateless Whois client.
+  ///
+  /// Construction does no I/O. Each [lookup] call opens its own TCP sockets,
+  /// so a single instance is safe to reuse for any number of concurrent
+  /// lookups.
+  WhoisClient();
+
   static const _ianaServer = 'whois.iana.org';
   static const _whoisPort = 43;
 
